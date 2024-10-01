@@ -4,7 +4,6 @@ const TwilioService = require("../client.service");
 const router = express.Router();
 
 router.post("/", (req, res) => {
-  console.log("req:whisper message", req);
   const twilioService = new TwilioService();
   const twiml = twilioService.voiceResponseInstance();
   const gather = twiml.gather({

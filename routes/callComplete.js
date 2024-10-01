@@ -7,7 +7,7 @@ router.post("/", (req, res) => {
     const twilioService = new TwilioService();
     const twiml = twilioService.voiceResponseInstance();
     const callStatus = req.body.DialCallStatus;
-    console.log("callStatus:", callStatus);
+    console.log("callStatus:in the call complete", callStatus);
 
     if (callStatus === "no-answer" || callStatus === "failed") {
       twiml.say(

@@ -6,21 +6,20 @@ router.post("/", (req, res) => {
   try {
     const query = req.query;
     const body = req.body;
-    console.log("body:", body);
     const phoneNumber = `+${query.phoneNumber.trim()}`;
-    console.log("phoneNumber:", phoneNumber);
-    const twilioNumber = body.CalledVia;
+    const twilioNumber = body.Called;
     const twilioService = new TwilioService();
     const twiml = twilioService.voiceResponseInstance();
     const dial = twiml.dial({
       action: `${process.env.BACKEND_URL}/call_complete`,
       timeout: 30,
-      callerId: "+14155552671",
+      callerId: twilioNumber,
     });
     dial.number(
       {
         statusCallbackEvent: ["initiated", "ringing", "answered", "completed"],
         statusCallback: `${process.env.BACKEND_URL}/call_status`,
+        statusCallbackMethod: "POST",
       },
       phoneNumber
     );

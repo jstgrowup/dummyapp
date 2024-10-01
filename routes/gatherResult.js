@@ -11,7 +11,6 @@ router.post("/", (req, res) => {
       twiml.record({ action: "/record_complete" });
       res.type("text/xml");
       return res.send(twiml.toString());
-
     case "2":
       twiml.hangup();
       res.type("text/xml");
