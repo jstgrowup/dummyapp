@@ -4,21 +4,20 @@ const router = express.Router();
 
 router.post("/", (req, res) => {
   try {
-    const twilioService = new TwilioService();
-    const twiml = twilioService.voiceResponseInstance();
-    const callStatus = req.body.DialCallStatus;
-    console.log("callStatus:in the call complete", callStatus);
-
-    if (callStatus === "no-answer" || callStatus === "failed") {
-      twiml.say(
-        { voice: "alice" },
-        "The call was not answered. You can leave a voicemail after the beep."
-      );
-      twiml.record({ action: `${process.env.BACKEND_URL}/record_complete` });
-    } else {
-      twiml.say({ voice: "alice" }, "The call has ended. Goodbye.");
-      twiml.hangup();
-    }
+    // const twilioService = new TwilioService();
+    // const twiml = twilioService.voiceResponseInstance();
+    // const body = req.body;
+    // const callStatus = body.DialCallStatus;
+    // if (callStatus === "no-answer" || callStatus === "failed") {
+    //   twiml.say(
+    //     { voice: "alice" },
+    //     "The call was not answered. You can leave a voicemail after the beep."
+    //   );
+    //   twiml.record({ action: `${process.env.BACKEND_URL}/record_complete` });
+    // } else {
+    //   twiml.say({ voice: "alice" }, "The call has ended. Goodbye.");
+    //   twiml.hangup();
+    // }
     // const gather = twiml.gather({
     //   numDigits: 1,
     //   timeout: 10,

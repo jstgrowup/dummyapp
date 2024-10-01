@@ -6,7 +6,7 @@ router.post("/", (req, res) => {
   try {
     const body = req.body;
     const callStatus = body.CallStatus;
-
+    console.log("callStatus:", callStatus);
     const twilioService = new TwilioService();
     const twiml = twilioService.voiceResponseInstance();
     if (callStatus === "no-answer") {
@@ -17,7 +17,7 @@ router.post("/", (req, res) => {
       });
       gather.say(
         { voice: "alice" },
-        "You are receiving a call, press any key to accept."
+        "Press 1 to record a voice mail and 2 to reject the call;"
       );
       res.type("text/xml");
       res.send(twiml.toString());

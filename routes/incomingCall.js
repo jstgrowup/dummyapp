@@ -10,7 +10,7 @@ router.post("/", (req, res) => {
     const twilioNumber = body.Called;
     const twilioService = new TwilioService();
     const twiml = twilioService.voiceResponseInstance();
-    const dial = twiml.dial({
+    twiml.dial({
       action: `${process.env.BACKEND_URL}/call_complete`,
       timeout: 30,
       callerId: twilioNumber,
