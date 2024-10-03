@@ -1,7 +1,6 @@
 const express = require("express");
 const TwilioService = require("../client.service");
 const router = express.Router();
-//https://1517-2405-201-a808-581a-5462-709c-3dd2-a28d.ngrok-free.app/api/webhook-handler/twilio/ivr-menu?phoneNumber=+919435355529
 router.post("/", (req, res) => {
   try {
     const query = req.query;
@@ -10,14 +9,23 @@ router.post("/", (req, res) => {
     const twilioNumber = body.Called;
     const twilioService = new TwilioService();
     const twiml = twilioService.voiceResponseInstance();
-    twiml.dial({
+    const dial = twiml.dial({
       action: `${process.env.BACKEND_URL}/call_complete`,
-      timeout: 30,
+      timeout: 10,
       callerId: twilioNumber,
     });
     dial.number(
       {
-        statusCallbackEvent: ["initiated", "ringing", "answered", "completed"],
+        statusCallbackEvent: [
+          "no-answer",
+          "busy",
+          "initiated",
+          "ringing",
+          "answered",
+          "completed",
+          "failed",
+          "canceled",
+        ],
         statusCallback: `${process.env.BACKEND_URL}/call_status`,
         statusCallbackMethod: "POST",
       },

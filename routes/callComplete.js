@@ -4,10 +4,11 @@ const router = express.Router();
 
 router.post("/", (req, res) => {
   try {
-    // const twilioService = new TwilioService();
-    // const twiml = twilioService.voiceResponseInstance();
-    // const body = req.body;
-    // const callStatus = body.DialCallStatus;
+    const twilioService = new TwilioService();
+    const twiml = twilioService.voiceResponseInstance();
+    const body = req.body;
+    const callStatus = body.DialCallStatus;
+    console.log("callStatus:call complete", callStatus);
     // if (callStatus === "no-answer" || callStatus === "failed") {
     //   twiml.say(
     //     { voice: "alice" },

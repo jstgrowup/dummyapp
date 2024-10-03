@@ -6,7 +6,7 @@ router.post("/", (req, res) => {
   try {
     const body = req.body;
     const callStatus = body.CallStatus;
-    console.log("callStatus:", callStatus);
+    console.log("callStatus: in the call status", callStatus);
     const twilioService = new TwilioService();
     const twiml = twilioService.voiceResponseInstance();
     if (callStatus === "no-answer") {
