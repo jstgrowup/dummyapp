@@ -1,12 +1,12 @@
 const express = require("express");
 const TwilioService = require("../client.service");
 const router = express.Router();
-
 router.post("/", (req, res) => {
   try {
     const body = req.body;
     const callStatus = body.CallStatus;
     console.log("callStatus: in the call status", callStatus);
+
     const twilioService = new TwilioService();
     const twiml = twilioService.voiceResponseInstance();
     if (callStatus === "no-answer") {
@@ -30,3 +30,10 @@ router.post("/", (req, res) => {
 });
 
 module.exports = router;
+// const dial = twiml.dial();
+// dial.conference("ConferenceName", {
+//   startConferenceOnEnter: true,
+//   endConferenceOnExit: false,
+//   waitUrl:
+//     "http://twimlets.com/holdmusic?Bucket=com.twilio.music.classical",
+// });
